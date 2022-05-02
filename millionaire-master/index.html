@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ով է ուզում դառնալ միլիոնատեր</title>
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <!-- Icon -->
+    <link rel="icon" href="image/Icons/Logo.png" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="libs/fontawesome/all.css" />
+  </head>
+  <body>
+    <!-- Loader -->
+    <div class="loader">
+      <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+    </div>
+    <!-- Log In -->
+    <section id="LogIn">
+      <main>
+        <form>
+          <input
+            class="login-input"
+            type="text"
+            name="name"
+            id="name"
+            minlength="4"
+            placeholder="Անուն"
+            required
+          />
+          <input
+            class="login-input"
+            type="text"
+            name="surname"
+            id="surname"
+            minlength="4"
+            placeholder="Ազգանուն"
+            required
+          />
+          <input
+            class="login-input"
+            type="number"
+            name="age"
+            id="age"
+            placeholder="Տարիք"
+          />
+          <button class="login-button" type="submit" onclick="login()">
+            Մուտք Գործել
+          </button>
+        </form>
+      </main>
+    </section>
+    <!-- Menu -->
+    <section id="Menu">
+      <main>
+        <div class="logo">
+          <img src="image/Icons/Logo.png" width="100%" height="100%" />
+        </div>
+        <div class="buttons">
+          <button class="login-button" onclick="Page('NewGame')">
+            Սկսել Նոր Խաղ
+          </button>
+          <button class="login-button" onclick="Page('AboutGame')">
+            Խաղի Մասին
+          </button>
+          <button class="login-button" onclick="Page('Best')">
+            Լավագույնները
+          </button>
+          <button class="login-button" onclick="Page('Settings')">
+            Կարգավորումներ
+          </button>
+          <button class="login-button" onclick="Page('AuthorGame')">
+            Խաղի Հեղինակ
+          </button>
+          <input
+            class="login-button"
+            type="button"
+            onclick="Page('Login');ClearLocalStorage()"
+            value="Դուրս Գալ"
+          />
+        </div>
+      </main>
+    </section>
+    <!-- New Game -->
+    <section id="NewGame">
+      <main>
+        <article class="header">
+          <div class="helps">
+            <div class="left">
+              <button
+                class="help quit"
+                title="Դուրս Գալ"
+                onclick="QuitModal()"
+                id="quit-modal"
+              ></button>
+              <button
+                class="help take"
+                id="take-modal"
+                title="Վերցնել Գումարը"
+                onclick="TakeModal()"
+              ></button>
+            </div>
+            <div class="money">
+              <p id="money">500</p>
+            </div>
+            <div class="right">
+              <button
+                class="help change"
+                id="change"
+                title="Փոխել հարցը"
+                onclick="ChangeHelp()"
+              ></button>
+              <button
+                class="help fifty-fifty"
+                id="fifty-fifty"
+                title="50-50"
+                onclick="FiftyFifty()"
+              ></button>
+              <button
+                class="help call"
+                id="call"
+                title="Զանգ Ընկերոջը"
+                onclick="HelpCall()"
+              ></button>
+              <button
+                class="help hall"
+                id="hall"
+                title="Դահլիճի Օգնության"
+                onclick="HelpHall()"
+              ></button>
+            </div>
+          </div>
+        </article>
+        <article class="main">
+          <div id="Preface">
+            <div class="main">
+              <p id="PrefaceText"></p>
+            </div>
+            <div class="footer">
+              <div class="yes" onclick="AnswerPrefaceModal('yes')">Այո</div>
+              <div class="no" onclick="AnswerPrefaceModal('no')">Ոչ</div>
+            </div>
+          </div>
+          <div id="Quiz">
+            <div class="question"><p id="Question"></p></div>
+            <div class="options">
+              <div
+                class="option option1"
+                id="option1"
+                onclick="AnswerQuestion(1)"
+              >
+                <p id="Option1"></p>
+              </div>
+              <div
+                class="option option2"
+                id="option2"
+                onclick="AnswerQuestion(2)"
+              >
+                <p id="Option2"></p>
+              </div>
+              <div
+                class="option option3"
+                id="option3"
+                onclick="AnswerQuestion(3)"
+              >
+                <p id="Option3"></p>
+              </div>
+              <div
+                class="option option4"
+                id="option4"
+                onclick="AnswerQuestion(4)"
+              >
+                <p id="Option4"></p>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- Modals -->
+        <!-- Quit Modal -->
+        <div id="QuitModal">
+          <div class="main">
+            <p>Դուք որոշել եք դաթարեցնե՞լ խաղը ու դուրս գալ գլխավոր ցանկ</p>
+          </div>
+          <div class="footer">
+            <div class="yes" onclick="AnswerQuitModal('yes')">Այո</div>
+            <div class="no" onclick="AnswerQuitModal('no')">Ոչ</div>
+          </div>
+        </div>
+        <!-- Take Modal -->
+        <div id="TakeModal">
+          <div class="main">
+            <p id="take-money">
+              Դուք որոշել եք դաթարեցնե՞լ խաղը ու վերցնել գումարը
+            </p>
+          </div>
+          <div class="footer">
+            <div class="yes" onclick="AnswerTakeModal('yes')">Այո</div>
+            <div class="no" onclick="AnswerTakeModal('no')">Ոչ</div>
+            <p id="p" style="display: none">-</p>
+          </div>
+        </div>
+        <!-- Help Call -->
+        <div id="HelpCall">
+          <div class="main">
+            <p id="HelpCallText"></p>
+          </div>
+          <div class="footer">
+            <div class="no" onclick="AnswerHelpCall()">Փակել</div>
+          </div>
+        </div>
+        <!-- Help Hall -->
+        <div id="HelpHall">
+          <div class="main">
+            <div>
+              <div style="display: flex; justify-content: center">
+                <progress
+                  class="HelpHallOption"
+                  id="HelpHallOption1"
+                  max="100"
+                ></progress>
+                <p
+                  class="HelpHallOptionPercent"
+                  id="HelpHallOptionPercent1"
+                ></p>
+              </div>
+              <p class="HelpHallOptionNumber">Ա</p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: center">
+                <progress
+                  class="HelpHallOption"
+                  id="HelpHallOption2"
+                  max="100"
+                ></progress>
+                <p
+                  class="HelpHallOptionPercent"
+                  id="HelpHallOptionPercent2"
+                ></p>
+              </div>
+              <p class="HelpHallOptionNumber">Բ</p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: center">
+                <progress
+                  class="HelpHallOption"
+                  id="HelpHallOption3"
+                  max="100"
+                ></progress>
+                <p
+                  class="HelpHallOptionPercent"
+                  id="HelpHallOptionPercent3"
+                ></p>
+              </div>
+              <p class="HelpHallOptionNumber">Գ</p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: center">
+                <progress
+                  class="HelpHallOption"
+                  id="HelpHallOption4"
+                  max="100"
+                ></progress>
+                <p
+                  class="HelpHallOptionPercent"
+                  id="HelpHallOptionPercent4"
+                ></p>
+              </div>
+              <p class="HelpHallOptionNumber">Դ</p>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="no" onclick="AnswerHelpHall()">Փակել</div>
+          </div>
+        </div>
+        <!-- Result Modal -->
+        <div id="ResultModal">
+          <div class="main">
+            <p id="ResultText"></p>
+          </div>
+          <div class="footer">
+            <div class="quit-quiz" onclick="Quit()">Գլխավոր Ցանկ</div>
+          </div>
+        </div>
+      </main>
+    </section>
+    <!-- About Game -->
+    <section id="AboutGame">
+      <main>
+        <div class="header">
+          <h3>Խաղի մասին</h3>
+        </div>
+        <div class="main">
+          <p>
+            «Ով է ուզում դառնալ միլիոնատեր»-ը հեռուստատեսային ինտելեկտուալ խաղ
+            է, որում յուրաքանչյուր մասնակից կարող է վաստակել 5000000 դրամ'
+            պատասխանելով տարբեր բնագավառների 15 հարցերի: Խաղի ժամանակ խաղացողը
+            իրավունք ունի օգտվելու 3 օգնության հնարավորություններից' "50:50",
+            "զանգ ընկերոջը" և "դահլիճի օգնություն": Խաղի օրիգինալ տարբերակի
+            առաջին եթերը տեղի է ունեցել 1998թ. սեպտեմբերի 4-ին անգլիական ITV1
+            ալիքով: Խաղի հիմնադիրն է Celador ընկերությունը: Խաղը միանգամից մեծ
+            ճանաչում ձեռք բերեց և այժմ խաղը անցկացնելու լիցենզիա ունեն ավելի քան
+            100 երկրներ:
+          </p>
+        </div>
+        <div class="footer">
+          <button class="login-button" onclick="Quit()">Գլխավոր Ցանկ</button>
+        </div>
+      </main>
+    </section>
+    <!-- Settings -->
+    <section id="Settings">
+      <main>
+        <div class="header">
+          <h3>Կարգավորումներ</h3>
+        </div>
+        <div class="main">
+          <div id="Up" onclick="VolumeUp(),Music('up')">
+            <i class="fas fa-volume-up"></i>
+          </div>
+          <div id="Mute" onclick="VolumeMute(),Music('mute')">
+            <i class="fas fa-volume-mute"></i>
+          </div>
+        </div>
+        <div class="footer">
+          <button class="login-button" onclick="Quit()">Գլխավոր Ցանկ</button>
+        </div>
+      </main>
+    </section>
+    <!-- Best -->
+    <section id="Best">
+      <main>
+        <div class="header">
+          <h3>Լավագույնները</h3>
+        </div>
+        <div class="main">
+          <table id="quiz-stats">
+            <tr>
+              <th>Անուն</th>
+              <th>Ազգանուն</th>
+              <th>Գումար</th>
+              <th>Ամսաթիվ</th>
+            </tr>
+          </table>
+        </div>
+        <div class="footer">
+          <button class="login-button" onclick="Quit()">Գլխավոր Ցանկ</button>
+        </div>
+      </main>
+    </section>
+    <!-- Author Game -->
+    <section id="AuthorGame">
+      <main>
+        <div class="header">
+          <h3>Խաղի Հեղինակ</h3>
+        </div>
+        <div class="main">
+          <div class="header-images">
+            <div class="header-image">
+              <img
+                src="image/Authors/arjanik-zaqoyan.jpg"
+                width="100%"
+                height="100%"
+              />
+              <p class="author-name">Արժանիկ Զաքոյան</p>
+              <a class="author-mail" target="_blank">
+                <i class="far fa-envelope"></i>
+                <p>arjanik.zakoyan@gmail.com</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <button class="login-button" onclick="Quit()">Գլխավոր Ցանկ</button>
+        </div>
+      </main>
+    </section>
+    <!-- Audio -->
+    <audio id="MusicMenu" autoplay>
+      <source src="music/menu.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="MusicPlay" autoplay>
+      <source src="music/play.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="Music1_5" autoplay>
+      <source src="music/1-5.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="Music6_10" autoplay>
+      <source src="music/6-10.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="Music11" autoplay>
+      <source src="music/11.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="Music12_13" autoplay>
+      <source src="music/12-13.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="Music14" autoplay>
+      <source src="music/14.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="Music15" autoplay>
+      <source src="music/15.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="MusicTrue" autoplay>
+      <source src="music/true.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="MusicFalse" autoplay>
+      <source src="music/false.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="helps" autoplay>
+      <source src="music/helps.mp3" type="audio/mp3" />
+    </audio>
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+  </body>
+</html>
